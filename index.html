@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Attendance</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        form {
+            max-width: 400px;
+            margin: auto;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        input[type="text"], input[type="number"], input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Student Attendance Tracker</h1>
+    
+    <form id="attendanceForm">
+        <label for="studentName">Student Name:</label>
+        <input type="text" id="studentName" name="studentName" required>
+        
+        <label for="rollNumber">Roll Number:</label>
+        <input type="number" id="rollNumber" name="rollNumber" required>
+        
+        <input type="submit" value="Mark Attendance">
+    </form>
+    
+    <table id="attendanceTable">
+        <thead>
+            <tr>
+                <th>Roll Number</th>
+                <th>Student Name</th>
+                <th>Attendance Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Attendance records will be added here dynamically -->
+        </tbody>
+    </table>
+
+    <script>
+        document.getElementById('attendanceForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form submission
+            
+            // Get current date
+            let currentDate = new Date().toLocaleDateString('en-US');
+            
+            // Get student name and roll number from input fields
+            let studentName = document.getElementById('studentName').value;
+            let rollNumber = document.getElementById('rollNumber').value;
+            
+            // Create new row for the table
+            let newRow = document.createElement('tr');
+            newRow.innerHTML = `
+                <td>${rollNumber}</td>
+                <td>${studentName}</td>
+                <td>${currentDate}</td>
+            `;
+            
+            // Append the new row to the table
+            document.querySelector('tbody').appendChild(newRow);
+            
+            // Clear the input fields after submission
+            document.getElementById('studentName').value = '';
+            document.getElementById('rollNumber').value = '';
+        });
+    </script>
+</body>
+</html>
